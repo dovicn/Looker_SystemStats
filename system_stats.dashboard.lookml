@@ -29,7 +29,7 @@
     height: 2
 
   - name: queries_run
-    title: Queries
+    title: Recent Queries
     type: looker_column
     base_view: stl_query
     dimensions: [stl_query.endtime_date]
@@ -38,6 +38,7 @@
       stl_query.database: '"onemodeltest"'
     sorts: [stl_query.endtime_date asc]
     limit: 500
-    
+    hide_legend: true
+    y_axis_labels: [Number of Queries]
 
     
