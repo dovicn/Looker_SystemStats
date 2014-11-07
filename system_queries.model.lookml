@@ -306,4 +306,6 @@
 
 - explore: systable_topology
 
+- explore: tablesizes
+
 
