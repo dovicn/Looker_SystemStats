@@ -27,18 +27,46 @@
     show_null_labels: false
     width: 4
     height: 2
-
-  - name: queries_run
-    title: Recent Queries
+  
+  - name: max_query_runtime
+    title: Maximum Query Runtime (ms)
+    type: single_value
+    base_view: stl_query
+    measures: [stl_query.max_query_time]
+    filters:
+      stl_query.database: '"onemodeltest"'
+    sorts: [stl_query.max_query_time desc]
+    limit: 500
+    show_null_labels: false
+    width: 4
+    height: 2
+    
+  - name: count_queries_by_elapsed
+    title: Recent Queries by Elapsed Time (ms)
     type: looker_column
     base_view: stl_query
-    dimensions: [stl_query.endtime_date]
+    dimensions: [stl_query.elapsed_time_range, stl_query.endtime_date]
+    pivots: [stl_query.elapsed_time_range]
     measures: [stl_query.count]
     filters:
       stl_query.database: '"onemodeltest"'
     sorts: [stl_query.endtime_date asc]
     limit: 500
+    show_null_labels: false
+    stacking: normal
     hide_legend: true
     y_axis_labels: [Number of Queries]
-
-    
+  
+  - name: recent_queries
+    title: Recent Queries
+    type: table
+    base_view: stl_query
+    dimensions: [stl_query.query, stl_query.starttime_time, stl_query.elapsed_time,
+      stl_query.querytxt_short]
+    filters:
+      stl_query.database: '"onemodeltest"'
+    sorts: [stl_query.starttime_time desc]
+    limit: 10
+    width: 8
+  
+  
