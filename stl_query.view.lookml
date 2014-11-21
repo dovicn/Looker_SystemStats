@@ -62,8 +62,9 @@
     drill_fields: [userid, starttime_date, endtime_date, elapsed_time, querytxt]
 
   - measure: average_query_time
-    type: average
-    sql: ${elapsed_time}
+    type: number
+    sql: sum(${elapsed_time}/1000.00) / ${count}
+    decimals: 2
     drill_fields: [userid, starttime_date, endtime_date, elapsed_time, querytxt]
   
   - measure: total_query_time
@@ -73,5 +74,5 @@
     
   - measure: max_query_time
     type: max
-    sql: ${elapsed_time}
+    sql: ${elapsed_time}/1000
     drill_fields: [userid, starttime_date, endtime_date, elapsed_time, querytxt]
